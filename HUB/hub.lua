@@ -8,7 +8,7 @@ require('hub_files/tool')
 -- rednet setup
 local rednet_host_id = os.getComputerID()
 -- turtle pairing
-local awaiting_turtles = true
+local awaiting_turtles = false
 
 -- HUB CONFIG
 local hub_position = {
@@ -124,15 +124,16 @@ print('Hub setup complete')
 print('Hub is now awaiting turtles and pockets')
 
 peripheral.find("modem", rednet.open)
+awaiting_turtles = true
 
 -- GET TURTLE IDs
 -- sorts all turtles into a table
 while awaiting_turtles do
     if (turtle_delta_count == default_turtle_count and pocket_delta_count == default_pocket_count) then
-        awaiting_turtles = false
         print('All turtles have been linked')
         print('Atleast one pocket has been linked')
-
+        
+        awaiting_turtles = false
         awaiting_commands = true
     end
     
