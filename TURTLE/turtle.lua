@@ -374,7 +374,7 @@ end
 -- bombing operations
 local function drop(i) 
     if i % 2 == 0 then
-        turtle.select(1)
+        turtle.select(2)
         turtle.placeDown()
         redstone.setOutput("bottom", true)
         sleep(0.5)
@@ -403,14 +403,17 @@ while finished_bombing do
     -- home direction is east
     -- turtle_directoin varies based on turtle_direction
 
-    local target = {
+    local t = {
         x = turtle_first_home.x,
         y = target.y,
         z = turtle_first_home.z,
         direction = home_direction,
     }
 
-    traverse(x, z, target, function ()
+    print("Navigation set to: HOME")
+    print("x: " .. x .. ", y: " .. y .. ", z: " .. z .. ", direction: " .. turtle_direction)
+
+    traverse(x, z, t, function ()
         finished_bombing = false
         move_line_down = true
     end)
