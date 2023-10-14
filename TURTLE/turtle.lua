@@ -256,9 +256,9 @@ while move_to_target do
 
 
         if z < target.z and turtle_direction == 'south' and traversal_z then
-            turtle.back()
-        elseif z > target.z and turtle_direction == 'south' and traversal_z then
             turtle.forward()
+        elseif z > target.z and turtle_direction == 'south' and traversal_z then
+            turtle.back()
         end
     end
 
@@ -289,9 +289,9 @@ while move_to_target do
         end
 
         if z < target.z and turtle_direction == 'north' and traversal_z then
-            turtle.forward()
-        elseif z > target.z and turtle_direction == 'north' and traversal_z then
             turtle.back()
+        elseif z > target.z and turtle_direction == 'north' and traversal_z then
+            turtle.forward()
         end
     end
 end
