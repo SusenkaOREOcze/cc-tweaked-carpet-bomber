@@ -53,16 +53,15 @@ local function traverse(x, z, td, callback)
     if return_home then
         if turtle_direction == 'north' then
             turtle.turnRight()
-            turtle_direction = 'east'
+            turtle.turnRight()
+            turtle_direction = 'south'
         elseif turtle_direction == 'south' then
-            turtle.turnLeft()
-            turtle_direction = 'east'
         elseif turtle_direction == 'west' then
-            turtle.turnRight()
-            turtle.turnRight()
-            turtle_direction = 'east'
+            turtle.turnLeft()
+            turtle_direction = 'south'
         elseif turtle_direction == 'east' then
-            turtle_direction = 'east'
+            turtle.turnRight()
+            turtle_direction = 'south'
         end
 
         return_home = false
@@ -120,19 +119,6 @@ local function traverse(x, z, td, callback)
     
 
         if z == td.z then
-            if turtle_direction == 'east' then
-            elseif turtle_direction == 'west' then
-                turtle.turnRight()
-                turtle.turnRight()
-                turtle_direction = 'east'
-            elseif turtle_direction == 'south' then
-                turtle.turnLeft()
-                turtle_direction = 'east'
-            elseif turtle_direction == 'north' then
-                turtle.turnLeft()
-                turtle_direction = 'east'
-            end
-
             traversal_x = true
             traversal_z = false
         end
@@ -140,7 +126,11 @@ local function traverse(x, z, td, callback)
         if turtle_direction == 'east' and traversal_z then
             turtle.turnRight()
             turtle_direction = 'south'
+        elseif turtle_direction == 'south' and traversal_x then
+            turtle.turnLeft()
+            turtle_direction = 'east'
         end
+
         if z < td.z and turtle_direction == 'south' and traversal_z then
             turtle.forward()
         elseif z > td.z and turtle_direction == 'south' and traversal_z then
@@ -153,7 +143,6 @@ local function traverse(x, z, td, callback)
             turtle.bback()
         end
     end
-
 
     -- target is south
     if td.direction == "south" then
