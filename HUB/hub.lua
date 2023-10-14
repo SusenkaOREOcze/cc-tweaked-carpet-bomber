@@ -211,7 +211,7 @@ end
 -- when turtles are at designated places, they will send a ready singnal
 while awaiting_transfer do
     if ready_turtles == turtle_delta_count then
-        awaiting_transfer = false
+        -- awaiting_transfer = false
         print("Contacting pockets...")
 
         for id, pc in ipairs(pocket_list) do
@@ -220,7 +220,6 @@ while awaiting_transfer do
     end
 
     local id, message, protocol = rednet.receive()
-
     if protocol == "B-12-READY" then
         print("Recieved ready singnal from turtle: " .. id .. ", designated: " .. tostring(message))
         print("-----------------")
