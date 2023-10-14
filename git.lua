@@ -7,7 +7,7 @@ print("Copied main fodl")
 
 shell.run("copy turtles.lua ..")
 shell.run("copy pockets.lua ..")
-shell.run("copy clear.lua ..")
+shell.run("copy clean.lua ..")
 print("Copied main files")
 
 shell.run("delete .")
