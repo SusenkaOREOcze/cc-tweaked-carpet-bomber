@@ -424,6 +424,7 @@ end
 -- return to home
 -- technically, this is reversed traversal
 
+return_home = true
 while finished_bombing do
     local x, y, z = gps.locate()
 
@@ -437,7 +438,6 @@ while finished_bombing do
         direction = home_direction,
     }
 
-    return_home = true
     traverse(x, z, t, function ()
         finished_bombing = false
         move_line_down = true
