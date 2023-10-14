@@ -33,6 +33,8 @@ local default_pocket_count = 1
 local pocket_delta_count = 0
 local turtle_delta_count = 0
 
+local ready_turtles = 0
+
 local awaiting_commands = false
 
 local turtle_list = {}
@@ -191,7 +193,7 @@ while awaiting_commands do
         print("Recieved target data")
         print("x: " .. data.target.x .. ", y: " .. data.target.y .. ", z: " .. data.target.z .. ", direction: " .. data.target.direction)
         print("Area of effect: " .. (data.target.radius*2)+1)
-        print("space betwean turtles: " .. ((data.target.radius*2)+1 / default_turtle_count))
+        print("space betwean turtles: " .. ((data.target.radius*2+1) / default_turtle_count))
         print("-----------------")
 
         for id, pc in ipairs(turtle_list) do
@@ -223,7 +225,7 @@ while awaiting_transfer do
         print("Recieved ready singnal from turtle: " .. id .. ", designated: " .. tostring(message))
         print("-----------------")
 
-        reay_turtles = ready_turtles + 1
+        ready_turtles = ready_turtles + 1
     end
 end
 

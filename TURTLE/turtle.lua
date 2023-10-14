@@ -317,10 +317,11 @@ if align_before_bombing then
 
     --gap calculation
     local gap = 0
-    if (target.radius*2+1 % turtle_count) > 0 then
-        gap = target.radius*2+1 / turtle_count
+    if ((target.radius*2+1) % turtle_count) > 0 then
+        gap = (target.radius*2+1) / turtle_count
+        gap = math.floor(gap) + 1
     else
-        gap = target.radius*2/ turtle_count
+        gap = target.radius*2 / turtle_count
     end
 
 
