@@ -145,8 +145,6 @@ while move_to_target do
     -- print("Moving to target...")
     
     local x, y, z = gps.locate()
-    print("Current position: " .. x .. " " .. y .. " " .. z)
-    print("---")
 
     -- based on target direction
     -- move respectivly on x and z
@@ -310,6 +308,7 @@ end
 if align_before_bombing then
 
     if designated_id == 1 then
+        turtle.forward()
         align_before_bombing = false
         await_bombing_confirm = true
         readyToStart()
@@ -329,7 +328,7 @@ if align_before_bombing then
         local position = designated_id / 2
         
         turtle.turnLeft()
-        for i = 1, position*gap do
+        for i = 1, (position*gap), 1 do
             turtle.forward()
         end
         turtle.turnRight()
@@ -342,7 +341,7 @@ if align_before_bombing then
         local position = (designated_id + 1) / 2
 
         turtle.turnRight()
-        for i = 1, position*gap do
+        for i = 1, (position*gap), 1 do
             turtle.forward()
         end
         turtle.turnLeft()
