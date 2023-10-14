@@ -444,13 +444,13 @@ while move_line_down do
 
     if y == turtle_first_home.y then
         if x == (turtle_first_home.x - turtle_count) then
-            break
+            shell.exit()
         end
         -- move further based on number
         if turtle.back() then
             turtle.back()
         else
-            break
+            shell.exit()
         end
     else 
         turtle.down()
