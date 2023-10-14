@@ -328,7 +328,7 @@ if align_before_bombing then
         local position = designated_id / 2
         
         turtle.turnLeft()
-        for i = 1, (position*gap), 1 do
+        for i = 1, (position*gap+1), 1 do
             turtle.forward()
         end
         turtle.turnRight()
@@ -338,10 +338,10 @@ if align_before_bombing then
         readyToStart()
 
     else
-        local position = (designated_id + 1) / 2
+        local position = (designated_id - 1) / 2
 
         turtle.turnRight()
-        for i = 1, (position*gap), 1 do
+        for i = 1, (position*gap+1), 1 do
             turtle.forward()
         end
         turtle.turnLeft()
