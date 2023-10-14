@@ -449,8 +449,12 @@ while move_line_down do
 
     if y == turtle_first_home.y then
         -- move further based on number
-        for i = 1, designated_id, 1 do
-            turtle.back()
+        for i = 1, (turtle_first_home.x - turtle_count), 1 do
+            if (turtle.back()) then
+                break
+            else 
+                turtle.back()
+            end
         end
     else 
         turtle.down()
