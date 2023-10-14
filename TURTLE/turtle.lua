@@ -8,7 +8,7 @@ local await_start = false
 local await_fuel = false
 
 local designated_id = 0
-local calibrated = false
+local calibrated = true
 
 
 local hub_direction = "west"
