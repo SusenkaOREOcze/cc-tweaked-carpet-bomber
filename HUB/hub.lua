@@ -129,8 +129,8 @@ awaiting_turtles = true
 -- GET TURTLE IDs
 -- sorts all turtles into a table
 while awaiting_turtles do
-    print("turtles: " .. default_turtle_count)
-    print("pockets: " .. default_pocket_count)
+    print("turtles: " .. turtle_delta_count)
+    print("pockets: " .. pocket_delta_count)
     print("- - - - -")
     if (turtle_delta_count == default_turtle_count and pocket_delta_count == default_pocket_count) then
         print('All turtles have been linked')
