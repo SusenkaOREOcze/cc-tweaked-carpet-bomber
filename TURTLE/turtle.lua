@@ -88,7 +88,7 @@ local function traverse(x, z, td, callback)
 
         if turtle_direction == 'east' and traversal_z then
             turtle.turnRight()
-            turtle_direction = 'west'
+            turtle_direction = 'south'
         end
         if z < td.z and turtle_direction == 'south' and traversal_z then
             turtle.forward()
@@ -286,10 +286,6 @@ end
 
 -- alligning within the turtles home area
 while move_line do
-    if not calibrated then
-        calibrate()
-        calibrated = true
-    end 
 
     local x, y, z = gps.locate()
     
