@@ -46,19 +46,19 @@ local move_line_down = false
 -- -- -- -- --
 
 -- TOOLS AND FUNCTIONS
-function traverse(x, z, target, callback)
+local function traverse(x, z, td, callback)
     
-    if target.direction == "west" then
+    if td.direction == "west" then
         traversal_z = true
 
-        if target.x == x and target.z == z then
+        if td.x == x and td.z == z then
             callback()
 
             traversal_x = false
             traversal_z = false
         end
 
-        if z == target.x and turtle_direction == 'east' then
+        if z == td.x and turtle_direction == 'east' then
             turtle.turnRight()
             turtle_direction = 'south'
 
@@ -70,33 +70,33 @@ function traverse(x, z, target, callback)
             turtle.turnRight()
             turtle_direction = 'west'
         end
-        if z < target.z and turtle_direction == 'south' and traversal_z then
+        if z < td.z and turtle_direction == 'south' and traversal_z then
             turtle.forward()
-        elseif z > target.z and turtle_direction == 'south' and traversal_z then
+        elseif z > td.z and turtle_direction == 'south' and traversal_z then
             turtle.back()
         end
 
 
-        if x < target.x and turtle_direction == 'west' and traversal_x then
+        if x < td.x and turtle_direction == 'west' and traversal_x then
             turtle.back()
-        elseif x > target.x and turtle_direction == 'west' and traversal_x then
+        elseif x > td.x and turtle_direction == 'west' and traversal_x then
             turtle.forward()
         end
     end
 
 
     -- target is east
-    if target.direction == "east" then
+    if td.direction == "east" then
         traversal_z = true
 
-        if target.x == x and target.z == z then
+        if td.x == x and td.z == z then
             callback()
 
             traversal_x = false
             traversal_z = false
         end
 
-        if z == target.x and turtle_direction == 'east' then
+        if z == td.x and turtle_direction == 'east' then
             turtle.turnLeft()
             turtle_direction = 'east'
 
@@ -108,32 +108,32 @@ function traverse(x, z, target, callback)
             turtle.turnRight()
             turtle_direction = 'south'
         end
-        if z < target.z and turtle_direction == 'south' and traversal_z then
+        if z < td.z and turtle_direction == 'south' and traversal_z then
             turtle.forward()
-        elseif z > target.z and turtle_direction == 'south' and traversal_z then
+        elseif z > td.z and turtle_direction == 'south' and traversal_z then
             turtle.back()
         end
 
-        if x < target.x and turtle_direction == 'east' and traversal_x then
+        if x < td.x and turtle_direction == 'east' and traversal_x then
             turtle.forward()
-        elseif x > target.x and turtle_direction == 'east' and traversal_x then
+        elseif x > td.x and turtle_direction == 'east' and traversal_x then
             turtle.bback()
         end
     end
 
 
     -- target is south
-    if target.direction == "south" then
+    if td.direction == "south" then
 
         traversal_x = true
-        if target.x == x and target.z == z then
+        if td.x == x and td.z == z then
             callback()
 
             traversal_x = false
             traversal_z = false
         end
 
-        if x == target.x and turtle_direction == 'east' then
+        if x == td.x and turtle_direction == 'east' then
             turtle.turnRight()
             turtle_direction = 'south'
 
@@ -141,32 +141,32 @@ function traverse(x, z, target, callback)
             traversal_z = true
         end
 
-        if x < target.x and turtle_direction == 'east' and traversal_x then
+        if x < td.x and turtle_direction == 'east' and traversal_x then
             turtle.forward()
-        elseif x > target.x and turtle_direction == 'east' and traversal_x then
+        elseif x > td.x and turtle_direction == 'east' and traversal_x then
             turtlle.back()
         end
 
 
-        if z < target.z and turtle_direction == 'south' and traversal_z then
+        if z < td.z and turtle_direction == 'south' and traversal_z then
             turtle.forward()
-        elseif z > target.z and turtle_direction == 'south' and traversal_z then
+        elseif z > td.z and turtle_direction == 'south' and traversal_z then
             turtle.back()
         end
     end
 
     -- target is north
-    if target.direction == "north" then
+    if td.direction == "north" then
 
         traversal_x = true
-        if target.x == x and target.z == z then
+        if td.x == x and td.z == z then
             callback()
 
             traversal_x = false
             traversal_z = false
         end
         
-        if x == target.x and turtle_direction == 'east' then
+        if x == td.x and turtle_direction == 'east' then
             turtle.turnLeft()
             turtle_direction = 'north'
 
@@ -174,15 +174,15 @@ function traverse(x, z, target, callback)
             traversal_z = true
         end
 
-        if x < target.x and turtle_direction == 'east' and traversal_x then
+        if x < td.x and turtle_direction == 'east' and traversal_x then
             turtle.forward()
-        elseif x > target.x and turtle_direction == 'east' and traversal_x then
+        elseif x > td.x and turtle_direction == 'east' and traversal_x then
             turtlle.back()
         end
 
-        if z < target.z and turtle_direction == 'north' and traversal_z then
+        if z < td.z and turtle_direction == 'north' and traversal_z then
             turtle.back()
-        elseif z > target.z and turtle_direction == 'north' and traversal_z then
+        elseif z > td.z and turtle_direction == 'north' and traversal_z then
             turtle.forward()
         end
     end
