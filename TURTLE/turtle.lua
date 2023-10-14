@@ -47,7 +47,9 @@ local move_line_down = false
 
 -- TOOLS AND FUNCTIONS
 local function traverse(x, z, td, callback)
-    
+    print("x: " .. x .. ", y: " .. td.y .. ", z: " .. z .. ", direction: " .. turtle_direction)
+    print("target x: " .. td.x .. ", target y: " .. td.y .. ", target z: " .. td.z .. ", target direction: " .. td.direction)
+
     if td.direction == "west" then
         traversal_z = true
 
@@ -409,9 +411,6 @@ while finished_bombing do
         z = turtle_first_home.z,
         direction = home_direction,
     }
-
-    print("Navigation set to: HOME")
-    print("x: " .. x .. ", y: " .. y .. ", z: " .. z .. ", direction: " .. turtle_direction)
 
     traverse(x, z, t, function ()
         finished_bombing = false
