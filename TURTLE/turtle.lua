@@ -12,7 +12,7 @@ local calibrated = false
 
 
 local hub_direction = "west"
-local turtle_direction = nil
+local turtle_direction = "east"
 local turtle_count = 0
 
 local turtle_first_home = {
@@ -108,48 +108,6 @@ end
 
 
 -- TRAVERSAL
--- calibrate in home area
-function calibrate()
-    local x, y, z = gps.locate()
-    local x2, y2, z2 = 0, 0, 0
-
-    if turtle.forward() then
-        turtle.forward()
-        x2, y2, z2 = gps.locate()
-        turtle.back()
-    elseif turtle.back() then
-        turtle.back()
-        x2, y2, z2 = gps.locate()
-        turtle.forward()
-    elseif not turtle.forward() then
-        turtle.turnLeft()
-        if turtle.forward() then
-            turtle.forward()
-            x2, y2, z2 = gps.locate()
-            turtle.back()
-            turtle.turnRight()
-        elseif turtle.back() then
-            turtle.back()
-            x2, y2, z2 = gps.locate()
-            turtle.forward()
-            turtle.turnRight()
-        end
-    end
-
-    
-    if x2 > x then
-        return
-    elseif x2 < x then
-        turtle.turnRight()
-        turtle.turnRight()
-    elseif z2 > z then
-        turtle.turnLeft()
-    elseif z2 < z then
-        turtle.turnRight()
-    end
-
-    turtle_direction = "east"
-end
 
 -- alligning within the turtles home area
 while move_line do
@@ -181,6 +139,7 @@ while start_rise do
 end
 
 -- get to target
+print(target.direction)
 while move_to_target do
     -- print("Moving to target...")
     
