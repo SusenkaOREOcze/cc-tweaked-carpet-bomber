@@ -119,9 +119,19 @@ local function traverse(x, z, td, callback)
 
     
 
-        if z == td.x and turtle_direction == 'east' then
-            turtle.turnLeft()
-            turtle_direction = 'east'
+        if z == td.x then
+            if turtle_direction == 'east' then
+            elseif turtle_direction == 'west' then
+                turtle.turnRight()
+                turtle.turnRight()
+                turtle_direction = 'east'
+            elseif turtle_direction == 'south' then
+                turtle.turnLeft()
+                turtle_direction = 'east'
+            elseif turtle_direction == 'north' then
+                turtle.turnRight()
+                turtle_direction = 'east'
+            end
 
             traversal_x = true
             traversal_z = false
