@@ -140,7 +140,7 @@ local function traverse(x, z, td, callback)
         if x < td.x and turtle_direction == 'east' and traversal_x then
             turtle.forward()
         elseif x > td.x and turtle_direction == 'east' and traversal_x then
-            turtle.bback()
+            turtle.back()
         end
     end
 
