@@ -42,21 +42,15 @@ local bombing = false
 local finished_bombing = false
 local move_line_down = false
 
+local return_home = false 
+
 
 -- -- -- -- --
 
 -- TOOLS AND FUNCTIONS
 local function traverse(x, z, td, callback)
-    if td.direction == "west" then
-        traversal_z = true
 
-        if td.x == x and td.z == z then
-            callback()
-
-            traversal_x = false
-            traversal_z = false
-        end
-
+    if return_home then
         if turtle_direction == 'north' then
             turtle.turnRight()
             turtle_direction = 'east'
@@ -69,6 +63,19 @@ local function traverse(x, z, td, callback)
             turtle_direction = 'east'
         elseif turtle_direction == 'east' then
             turtle_direction = 'east'
+        end
+
+        return_home = false
+    end
+
+    if td.direction == "west" then
+        traversal_z = true
+
+        if td.x == x and td.z == z then
+            callback()
+
+            traversal_x = false
+            traversal_z = false
         end
 
         if z == td.x and turtle_direction == 'east' then
@@ -110,19 +117,7 @@ local function traverse(x, z, td, callback)
             traversal_z = false
         end
 
-        if turtle_direction == 'north' then
-            turtle.turnRight()
-            turtle_direction = 'east'
-        elseif turtle_direction == 'south' then
-            turtle.turnLeft()
-            turtle_direction = 'east'
-        elseif turtle_direction == 'west' then
-            turtle.turnRight()
-            turtle.turnRight()
-            turtle_direction = 'east'
-        elseif turtle_direction == 'east' then
-            turtle_direction = 'east'
-        end
+    
 
         if z == td.x and turtle_direction == 'east' then
             turtle.turnLeft()
@@ -161,19 +156,7 @@ local function traverse(x, z, td, callback)
             traversal_z = false
         end
 
-        if turtle_direction == 'north' then
-            turtle.turnRight()
-            turtle_direction = 'east'
-        elseif turtle_direction == 'south' then
-            turtle.turnLeft()
-            turtle_direction = 'east'
-        elseif turtle_direction == 'west' then
-            turtle.turnRight()
-            turtle.turnRight()
-            turtle_direction = 'east'
-        elseif turtle_direction == 'east' then
-            turtle_direction = 'east'
-        end
+        
 
         if x == td.x and turtle_direction == 'east' then
             turtle.turnRight()
@@ -208,19 +191,7 @@ local function traverse(x, z, td, callback)
             traversal_z = false
         end
 
-        if turtle_direction == 'north' then
-            turtle.turnRight()
-            turtle_direction = 'east'
-        elseif turtle_direction == 'south' then
-            turtle.turnLeft()
-            turtle_direction = 'east'
-        elseif turtle_direction == 'west' then
-            turtle.turnRight()
-            turtle.turnRight()
-            turtle_direction = 'east'
-        elseif turtle_direction == 'east' then
-            turtle_direction = 'east'
-        end
+       
         
         if x == td.x and turtle_direction == 'east' then
             turtle.turnLeft()
