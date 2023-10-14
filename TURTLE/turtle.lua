@@ -325,7 +325,7 @@ if align_before_bombing then
         gap = target.radius*2 / turtle_count
     end
 
-    if designated_id == 1 then
+    if tonumber(designated_id) == 1 then
         turtle.forward()
         align_before_bombing = false
         await_bombing_confirm = true
@@ -384,7 +384,7 @@ local function drop(i)
 end
 
 while bombing do
-    for i = 1, target.length, 1 do
+    for i = 1, target.lenght, 1 do
         drop(i)
         turtle.forward()
     end
