@@ -416,6 +416,8 @@ while bombing do
     end
     bombing = false
     print("Finished bomb dropping...")
+    print("-----------------")
+    rednet.send(rednet_host_id, designated_id, "B-12-SUCCESS")
     finished_bombing = true
 end
 
@@ -426,9 +428,6 @@ end
 return_home = true
 while finished_bombing do
     local x, y, z = gps.locate()
-
-    -- home direction is east
-    -- turtle_directoin varies based on turtle_direction
 
     local t = {
         x = turtle_first_home.x,

@@ -256,6 +256,10 @@ turtle_delta_count = 0
 while awaiting_success do
     if ready_turtles == turtle_delta_count then
 
+        for id, pc in ipairs(pocket_list) do
+            rednet.send(pc, "success", "B-12-SUCCESS")
+        end
+
         shell.run("clear")
 
         print("Operation B-12-B has ended")
