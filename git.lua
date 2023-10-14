@@ -1,0 +1,6 @@
+print("Extracting files to root")
+print("------------------------------------------")
+shell.run("copy cc-tweaked-carpet-bomber/ .")
+shell.run("delete cc-tweaked-carpet-bomber/")
+print("------------------------------------------")
+print("Done")
