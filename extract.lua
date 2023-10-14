@@ -11,7 +11,6 @@ local pockets = {
 }
 
 print("Extracting files to root")
-shell.run("cd ..")
 shell.run("copy cc-tweaked-carpet-bomber/ .")
 shell.run("delete cc-tweaked-carpet-bomber/")
 print("Done")
@@ -21,19 +20,19 @@ print("Copying TURTLE/ to all turtles and pockets")
 print("------------------------------------------")
 for i, value in ipairs(turtles) do
     shell.run("delete " .. value .. "/TURTLE")
-    shell.run("copy TURTLE/ " .. value .. "/")
+    shell.run("copy TURTLE/ " .. value)
 
-    print("Copying TURTLE/ to " .. value .. "/TURTLE")
+    print("Copying TURTLE/ to " .. value)
 end
 print("------------------------------------------")
 print(" ")
 print("Copying TURTLE/ to all pockets")
 print("------------------------------------------")
 for i, value in ipairs(pockets) do
-    shell.run("delete " .. value .. "/TURTLE")
-    shell.run("copy POCKET/ " .. value .. "/")
+    shell.run("delete " .. value .. "/POCKET")
+    shell.run("copy POCKET/ " .. value)
 
-    print("Copying POCKET/ to " .. value .. "/POCKET")
+    print("Copying POCKET/ to " .. value)
 end
 print("------------------------------------------")
 print("Done")
