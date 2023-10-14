@@ -77,7 +77,7 @@ local function traverse(x, z, td, callback)
             traversal_z = false
         end
 
-        if z == td.z and turtle_direction == 'SOUTH' then
+        if z == td.z and turtle_direction == 'south' then
             turtle.turnRight()
             turtle_direction = 'west'
 
@@ -443,14 +443,14 @@ while move_line_down do
     local x, y, z = gps.locate()
 
     if y == turtle_first_home.y then
-        -- move further based on number
-        print(tostring(turtle_count))
         if x == (turtle_first_home.x - turtle_count) then
-            if turtle.back() then
-                break
-            else 
-                turtle.back()
-            end
+            break
+        end
+        -- move further based on number
+        if turtle.back() then
+            turtle.back()
+        else
+            break
         end
     else 
         turtle.down()

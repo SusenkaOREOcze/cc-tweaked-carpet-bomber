@@ -260,7 +260,7 @@ while awaiting_success do
             rednet.send(pc, "success", "B-12-SUCCESS")
         end
 
-        term.clear()
+        -- term.clear()
 
         print("Operation B-12-B has ended")
         print("-----------------")

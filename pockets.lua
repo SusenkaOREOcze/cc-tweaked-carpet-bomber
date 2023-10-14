@@ -1,5 +1,5 @@
 local pockets = {
-    "disk6",
+    "disk",
 }
 
 print("Copying POCKET/ to all pockets")
