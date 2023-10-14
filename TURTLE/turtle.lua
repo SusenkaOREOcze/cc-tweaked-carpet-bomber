@@ -437,6 +437,7 @@ while finished_bombing do
         direction = home_direction,
     }
 
+    return_home = true
     traverse(x, z, t, function ()
         finished_bombing = false
         move_line_down = true
