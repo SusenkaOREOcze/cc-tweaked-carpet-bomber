@@ -28,7 +28,7 @@ local hub_direction = "west"
 
 -- BOMBING CONFIG
 -- config for bombing operations
-local default_turtle_count = 3
+local default_turtle_count = 5
 local default_pocket_count = 1
 local pocket_delta_count = 0
 local turtle_delta_count = 0

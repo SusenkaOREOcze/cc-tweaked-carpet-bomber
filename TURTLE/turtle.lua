@@ -348,7 +348,7 @@ if align_before_bombing then
         gap = (target.radius*2+1) / turtle_count
         gap = math.floor(gap) + 1
     else
-        gap = target.radius*2 / turtle_count
+        gap = (target.radius*2+1) / turtle_count
     end
 
     if tonumber(designated_id) == 1 then
