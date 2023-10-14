@@ -1,6 +1,6 @@
-local turtles_tab = multishell.launch({}, "turtles.lua")
-local pockets_tab = multishell.launch({}, "pockets.lua")
-local git = multishell.launch({}, "git.lua")
+local turtles_tab = multishell.launch({}, "cc-tweaked-carpet-bomber/turtles.lua")
+local pockets_tab = multishell.launch({}, "cc-tweaked-carpet-bomber/pockets.lua")
+local git = multishell.launch({}, "cc-tweaked-carpet-bomber/git.lua")
 
 multishell.setTitle(turtles_tab, "Turtles")
 multishell.setTitle(pockets_tab, "Pockets")
