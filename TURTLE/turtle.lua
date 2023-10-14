@@ -448,8 +448,9 @@ while move_line_down do
 
     if y == turtle_first_home.y then
         -- move further based on number
-        for i = 1, (turtle_first_home.x - turtle_count), 1 do
-            if (turtle.back()) then
+        print(tostring(turtle_count))
+        if x == (turtle_first_home.x - turtle_count) then
+            if turtle.back() then
                 break
             else 
                 turtle.back()

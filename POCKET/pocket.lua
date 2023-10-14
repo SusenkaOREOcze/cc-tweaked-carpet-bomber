@@ -179,7 +179,7 @@ while awaiting_success do
     local id, message, protocol = rednet.receive()
 
     if id == rednet_host_id and protocol == "B-12-SUCCESS" then
-        shell.run("clear")
+        term.clear()
         print("Operation B-12-B has ended")
         print("-----------------")
         print("Target has bee nremoved from map")
