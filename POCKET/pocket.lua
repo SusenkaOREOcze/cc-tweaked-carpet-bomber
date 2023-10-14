@@ -157,13 +157,18 @@ while awaiting_drop_confirmation do
             awaiting_success = true
 
         elseif confirm == 'n' then
-            rednet.send(rednet_host_id, "abort", "B-12-BOMB")
-            print("Aborting...")
-            shell.exit()
+            print("Nope...")
+
+            rednet.send(rednet_host_id, "confirm", "B-12-BOMB")
+
+            awaiting_drop_confirmation = false
+            awaiting_success = true
         else
             print("Invalid input")
-            print("Aborting...")
-            shell.exit()
+            rednet.send(rednet_host_id, "confirm", "B-12-BOMB")
+
+            awaiting_drop_confirmation = false
+            awaiting_success = true
         end
 
     end
@@ -173,8 +178,13 @@ end
 while awaiting_success do
     local id, message, protocol = rednet.receive()
 
-    if id == rednet_host_id and protocol == "B-12" and tostring(message) == "success" then
-        print("Mission successful")
+    if id == rednet_host_id and protocol == "B-12-SUCCESS" then
+        shell.run("clear")
+        print("Operation B-12-B has ended")
+        print("-----------------")
+        print("Target has bee nremoved from map")
+        print("...")
+        print("Turtles will return to home shortly")
         awaiting_success = false
         shell.exit()
     end

@@ -211,12 +211,14 @@ end
 -- when turtles are at designated places, they will send a ready singnal
 while awaiting_transfer do
     if ready_turtles == turtle_delta_count then
-        -- awaiting_transfer = false
         print("Contacting pockets...")
-
+        
         for id, pc in ipairs(pocket_list) do
             rednet.send(pc, "confirm bomb", "B-12-BOMB")
         end
+        print("done")
+        awaiting_transfer = false
+        awaiting_ready_form_pocket = true
     end
 
     local id, message, protocol = rednet.receive()
@@ -245,8 +247,38 @@ while awaiting_ready_form_pocket do
         print("...")
 
         awaiting_ready_form_pocket = false
+        awaiting_success = true
     end
 end
+
+-- AWAITING SUCCESS
+turtle_delta_count = 0
+while awaiting_success do
+    if ready_turtles == turtle_delta_count then
+
+        shell.run("clear")
+
+        print("Operation B-12-B has ended")
+        print("-----------------")
+        print("We thank you for your service")
+        print("...")
+        print("Turtles will return to home shortly")
+
+        awaiting_success = false
+        
+        shell.exit()
+    end
+
+    local id, message, protocol = rednet.receive()
+
+    if protocol == "B-12-SUCCESS" then
+        print("Recieved success singnal from turtle: " .. id .. ", designated: " .. tostring(message))
+        print("-----------------")
+        turtle_delta_count = turtle_delta_count + 1
+    end
+end
+
+
 
 
 

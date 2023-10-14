@@ -1,6 +1,8 @@
 -- -- -- -- --
 -- CONFIG
 
+require("turtle_files.tool")
+
 -- rednet setup
 local rednet_host_id = 117
 local await_reply = true
@@ -15,6 +17,7 @@ local traversal_z = false
 
 local hub_direction = "west"
 local turtle_direction = "east"
+local home_direction = "east"
 local turtle_count = 0
 
 local turtle_first_home = {
@@ -39,6 +42,7 @@ local align_before_bombing = false
 local await_bombing_confirm = false
 local bombing = false
 local finished_bombing = false
+local move_line_down = false
 
 
 -- -- -- -- --
@@ -150,148 +154,10 @@ while move_to_target do
     -- move respectivly on x and z
 
     --target is west
-    if target.direction == "west" then
-        traversal_z = true
-
-        if target.x == x and target.z == z then
-            move_to_target = false
-            align_before_bombing = true
-
-            traversal_x = false
-            traversal_z = false
-        end
-
-        if z == target.x and turtle_direction == 'east' then
-            turtle.turnRight()
-            turtle_direction = 'south'
-
-            traversal_x = true
-            traversal_z = false
-        end
-
-        if turtle_direction == 'east' and traversal_z then
-            turtle.turnRight()
-            turtle_direction = 'west'
-        end
-        if z < target.z and turtle_direction == 'south' and traversal_z then
-            turtle.forward()
-        elseif z > target.z and turtle_direction == 'south' and traversal_z then
-            turtle.back()
-        end
-
-
-        if x < target.x and turtle_direction == 'west' and traversal_x then
-            turtle.back()
-        elseif x > target.x and turtle_direction == 'west' and traversal_x then
-            turtle.forward()
-        end
-    end
-
-
-    -- target is east
-    if target.direction == "east" then
-        traversal_z = true
-
-        if target.x == x and target.z == z then
-            move_to_target = false
-            align_before_bombing = true
-
-            traversal_x = false
-            traversal_z = false
-        end
-
-        if z == target.x and turtle_direction == 'east' then
-            turtle.turnLeft()
-            turtle_direction = 'east'
-
-            traversal_x = true
-            traversal_z = false
-        end
-
-        if turtle_direction == 'east' and traversal_z then
-            turtle.turnRight()
-            turtle_direction = 'south'
-        end
-        if z < target.z and turtle_direction == 'south' and traversal_z then
-            turtle.forward()
-        elseif z > target.z and turtle_direction == 'south' and traversal_z then
-            turtle.back()
-        end
-
-        if x < target.x and turtle_direction == 'east' and traversal_x then
-            turtle.forward()
-        elseif x > target.x and turtle_direction == 'east' and traversal_x then
-            turtle.bback()
-        end
-    end
-
-
-    -- target is south
-    if target.direction == "south" then
-
-        traversal_x = true
-        if target.x == x and target.z == z then
-            move_to_target = false
-            align_before_bombing = true
-
-            traversal_x = false
-            traversal_z = false
-        end
-
-        if x == target.x and turtle_direction == 'east' then
-            turtle.turnRight()
-            turtle_direction = 'south'
-
-            traversal_x = false
-            traversal_z = true
-        end
-
-        if x < target.x and turtle_direction == 'east' and traversal_x then
-            turtle.forward()
-        elseif x > target.x and turtle_direction == 'east' and traversal_x then
-            turtlle.back()
-        end
-
-
-        if z < target.z and turtle_direction == 'south' and traversal_z then
-            turtle.forward()
-        elseif z > target.z and turtle_direction == 'south' and traversal_z then
-            turtle.back()
-        end
-    end
-
-    -- target is north
-    if target.direction == "north" then
-
-        traversal_x = true
-        if target.x == x and target.z == z then
-            move_to_target = false
-            align_before_bombing = true
-
-            traversal_x = false
-            traversal_z = false
-        end
-        
-        if x == target.x and turtle_direction == 'east' then
-            turtle.turnLeft()
-            turtle_direction = 'north'
-
-            traversal_x = false
-            traversal_z = true
-        end
-
-        if x < target.x and turtle_direction == 'east' and traversal_x then
-            turtle.forward()
-        elseif x > target.x and turtle_direction == 'east' and traversal_x then
-            turtlle.back()
-        end
-
-        if z < target.z and turtle_direction == 'north' and traversal_z then
-            turtle.back()
-        elseif z > target.z and turtle_direction == 'north' and traversal_z then
-            turtle.forward()
-        end
-    end
+    traverse(x, z, target, function ()
+        move_to_target = false
+        align_before_bombing = true
+    end)
 end
 
 
@@ -307,13 +173,6 @@ end
 
 if align_before_bombing then
 
-    if designated_id == 1 then
-        turtle.forward()
-        align_before_bombing = false
-        await_bombing_confirm = true
-        readyToStart()
-    end
-
     --gap calculation
     local gap = 0
     if ((target.radius*2+1) % turtle_count) > 0 then
@@ -323,8 +182,12 @@ if align_before_bombing then
         gap = target.radius*2 / turtle_count
     end
 
-
-    if (designated_id % 2) == 0 then
+    if designated_id == 1 then
+        turtle.forward()
+        align_before_bombing = false
+        await_bombing_confirm = true
+        readyToStart()
+    elseif (designated_id % 2) == 0 then
         local position = designated_id / 2
         
         turtle.turnLeft()
@@ -366,13 +229,60 @@ while await_bombing_confirm do
 end
 
 -- bombing operations
+local function drop(i) 
+    if i % 2 == 0 then
+        turtle.select(1)
+        turtle.placeDown()
+        redstone.setOutput("bottom", true)
+        sleep(0.5)
+        redstone.setOutput("bottom", false)
+        turtle.forward()
+    end
+end
+
 while bombing do
-    for i = 1, target.length do
-        
-        -- turtle.placeDown()
+    for i = 1, target.length, 1 do
+        drop(i)
         turtle.forward()
     end
     bombing = false
     print("Finished bomb dropping...")
     finished_bombing = true
+end
+
+-- FINISHED BOMBING
+-- return to home
+-- technically, this is reversed traversal
+
+while finished_bombing do
+    local x, y, z = gps.locate()
+
+    -- home direction is east
+    -- turtle_directoin varies based on turtle_direction
+
+    local target = {
+        x = turtle_first_home.x,
+        y = target.y,
+        z = turtle_first_home.z,
+        direction = home_direction,
+    }
+
+    traverse(x, z, target, function ()
+        finished_bombing = false
+        move_line_down = true
+    end)
+end
+
+-- PARKING
+while move_line_down do
+    local x, y, z = gps.locate()
+
+    if y == turtle_first_home.y then
+        -- move further based on number
+        for i = 1, designated_id, 1 do
+            turtle.back()
+        end
+    else 
+        turtle.down()
+    end
 end
